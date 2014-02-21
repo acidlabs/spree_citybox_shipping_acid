@@ -7,6 +7,6 @@ module Spree::ShippingMethodHelper
       options << ["#{machine.css('locationdescription').inner_text}", "#{machine.css('locationdescription').inner_text} // #{machine.css('street').inner_text} #{machine.css('buildingnumber').inner_text} // #{machine.css('province').inner_text}"]
     end  
 
-    content_tag("select", options_for_select(options))
+    content_tag("select", options_for_select(options), id: 'citybox_locations')
   end
 end
