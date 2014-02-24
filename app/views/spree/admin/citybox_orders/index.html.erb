@@ -1,0 +1,60 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:envios_citybox) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li id="export_citybox_orders">
+    <a href="#">Exportar</a>
+  </li>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/order_submenu' %>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
+
+
+
+<div id="new_citybox_orders_wrapper" data-hook></div>
+
+<% if @collection.any? %>
+  <table class="index" id="listing_citybox_orders">
+    <colgroup>
+       <col style="width: 15%;">
+       <col style="width: 10%;">
+       <col style="width: 48%;">
+       <col style="width: 10%;">
+       <col style="width: 17%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_citybox_orders_index_headers">
+        <th>Nombre Destinatario</th>
+        <th>Dirección Destinatario</th>
+        <th>Comuna</th>
+        <th>País</th>
+        <th>Referencia</th>
+        <th>Valor</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Fecha Creación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @collection.each do |citybox| %>
+          <tr id="<%= spree_dom_id citybox %>" data-hook="admin_citybox_orders_index_rows" class="<%= cycle('odd', 'even') %>">
+            <td class="align-center"><%= citybox.customer_name rescue '' %></td>
+            <td class="align-center"><%= citybox.citybox_location rescue '' %></td>
+            <td class="align-center"><%= citybox.city rescue '' %></td>
+            <td class="align-center"><%= citybox.country rescue '' %></td>
+            <td class="align-center"><%= citybox.order.id rescue '' %></td>
+            <td class="align-center"><%= citybox.total rescue '' %></td>
+            <td class="align-center"><%= citybox.email rescue '' %></td>
+            <td class="align-center"><%= citybox.phone rescue '' %></td>
+            <td class="align-center"><%= citybox.created_at rescue '' %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
