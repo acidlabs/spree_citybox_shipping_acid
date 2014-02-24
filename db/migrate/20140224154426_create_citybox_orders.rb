@@ -10,7 +10,7 @@ class CreateCityboxOrders < ActiveRecord::Migration
       t.boolean :package    ,:default => true
       t.references :order
       t.string :content
-      t.decimal :total      ,:precision => 8, :scale => 2, :default => 0.0
+      t.integer :total
       t.decimal :kilogram   ,:precision => 8, :scale => 2, :default => 0.0
       t.decimal :volume     ,:precision => 8, :scale => 2, :default => 0.0
       t.string :ship_address
