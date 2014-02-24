@@ -19,22 +19,10 @@ bundle
 bundle exec rails g spree_chilean_shipping:install
 ```
 
-Testing
--------
+Add shipping method with internal name: "citybox"
 
-Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
+TODO Testing
 
-```shell
-bundle
-bundle exec rake test_app
-bundle exec rspec spec
 ```
 
-When testing your applications integration with this extension you may use it's factories.
-Simply add this require statement to your spec_helper:
-
-```ruby
-require 'spree_chilean_shipping/factories'
-```
-
-Copyright (c) 2014 [name of extension creator], released under the New BSD License
+Copyright (c) 2014 [Gonzalo Moreno], released under the New BSD License
