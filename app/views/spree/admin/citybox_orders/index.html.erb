@@ -3,9 +3,15 @@
 <% end %>
 
 <% content_for :page_actions do %>
-  <li id="export_citybox_orders">
-    <a href="#">Exportar</a>
-  </li>
+  <%= search_form_for @q, :url => admin_citybox_orders_path do |f| %>
+    <%= f.label :created_at_gteq, 'Desde'%>
+    <%= f.date_field :created_at_gteq %>
+
+    <%= f.label :created_at_lteq, 'Hasta' %>
+    <%= f.date_field :created_at_lteq %>
+    <%= f.submit 'Filtrar' %>
+    <%= f.submit 'Exportar' %>
+  <% end %>
 <% end %>
 
 <%= render :partial => 'spree/admin/shared/order_submenu' %>
@@ -14,19 +20,10 @@
   <%= Spree.t(:search) %>
 <% end %>
 
-
-
 <div id="new_citybox_orders_wrapper" data-hook></div>
 
 <% if @collection.any? %>
   <table class="index" id="listing_citybox_orders">
-    <colgroup>
-       <col style="width: 15%;">
-       <col style="width: 10%;">
-       <col style="width: 48%;">
-       <col style="width: 10%;">
-       <col style="width: 17%;">
-    </colgroup>
     <thead>
       <tr data-hook="admin_citybox_orders_index_headers">
         <th>Nombre Destinatario</th>

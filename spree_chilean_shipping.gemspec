@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 2.1.4'
   s.add_dependency 'spree_frontend', '~> 2.1.4'
+  s.add_dependency 'write_xlsx', '~> 0.76.0'
 
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
