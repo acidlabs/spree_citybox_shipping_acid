@@ -1,4 +1,6 @@
 source "http://rubygems.org"
+
+gem 'spree_chilexpress_shipping', path: '/vagrant/spree_chilexpress_shipping'
 gemspec
 
 group :test do
