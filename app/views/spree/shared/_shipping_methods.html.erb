@@ -1,32 +1,36 @@
 <ul class="list-group shipping-methods">
   <% ship_form.object.shipping_rates.with_shipping_method.each do |rate| %>
+    <% if @disable_all_except_citybox.present? %>
+      <% next unless rate.shipping_method.citybox? %>
+    <% end %>
     <li class="list-group-item shipping-method">
       <%= image_tag "store/logo_#{rate.shipping_method.admin_name}.png" %>
       <% if rate.shipping_method.citybox? %>
         <a href="http://www.citybox.cl/que-es" target="_blank">¿Que es CityBox?</a>
+        <strong>*DISPONIBLE SOLO PARA SANTIAGO</strong>
       <% end %>                
       <label>
-        <%= ship_form.radio_button :selected_shipping_rate_id, rate.id %>
-        <span class="rate-name"><%= rate.name %></span>
-        <span class="badge rate-cost"><%= rate.display_cost %></span>
-        <% if rate.shipping_method.citybox? %>
-          <div class="form-inline">
-            <%= form.fields_for :ship_address do |address_form| %>
-              <span class="options_citybox"><%= citybox_field %></span>
-              <strong>*DISPONIBLE SOLO PARA SANTIAGO</strong>
-              <%= address_form.hidden_field :firstname %>
-              <%= address_form.hidden_field :lastname %>
-              <%= address_form.hidden_field :address1 %>
-              <%= address_form.hidden_field :address2 %>
-              <%= address_form.hidden_field :city %>
-              <%= address_form.hidden_field :country_id, :value => address_form.object.country.id %>
-              <%= address_form.hidden_field :state_id, :value => address_form.object.state.id %>
-              <%= address_form.hidden_field :zipcode %>
-              <%= address_form.hidden_field :phone %>
-              <%= address_form.phone_field :alternative_phone %>
-            <% end %>
-          </div>                  
-        <% end %>
+        <div class="radio inline">
+          <%= ship_form.radio_button :selected_shipping_rate_id, rate.id, :checked => @disable_all_except_citybox.present? ? true : false %>
+          <span class="rate-name"><%= rate.name %></span>
+          <span class="badge rate-cost"><%= rate.display_cost %></span>
+          <% if rate.shipping_method.citybox? %>
+            <div class="form-inline">
+              <%= form.fields_for :ship_address do |address_form| %>
+                <span class="options_citybox"><%= citybox_field %></span>
+                <%= address_form.hidden_field :firstname %>
+                <%= address_form.hidden_field :lastname %>
+                <%= address_form.hidden_field :address1 %>
+                <%= address_form.hidden_field :address2 %>
+                <%= address_form.hidden_field :city %>
+                <%= address_form.hidden_field :country_id, :value => address_form.object.country.id %>
+                <%= address_form.hidden_field :state_id, :value => address_form.object.state.id %>
+                <%= address_form.hidden_field :zipcode %>
+                <%= address_form.phone_field :phone, :placeholder => "Celular 8 dígitos" %>
+              <% end %>
+            </div>                  
+          <% end %>
+        </div>
       </label>      
     </li>
   <% end %>
