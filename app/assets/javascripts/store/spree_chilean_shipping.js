@@ -54,14 +54,6 @@
       $("#order_bill_address_attributes_city").val('dummy_city');
       $("#order_bill_address_attributes_zipcode").val('8320000');
     }
-  });
-
-  
-
-  
-
-  
-
-  
+  });  
   
 })(jQuery);

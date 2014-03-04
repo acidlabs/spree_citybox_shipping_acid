@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_chilean_shipping'
-  s.version     = '2.1.5'
+  s.version     = '2.1.6'
   s.summary     = 'Add support for chilean shipping methods'
   s.description = 'Add support for chilean shipping methods like citybox and chilexpress'
   s.required_ruby_version = '>= 1.9.3'

@@ -2,6 +2,16 @@ Spree::CheckoutController.class_eval do
   require_dependency "spree/citybox_helper"
   helper Spree::ShippingMethodHelper
 
+  before_filter :ensure_citybox, :only => :update
+
+  def ensure_citybox
+    if @order.state == "address" 
+      if params[:use_citybox] == "1"
+        params[:order][:bill_address_attributes][:state_id] = Spree::State.find_by_name('Metropolitana').id
+      end
+    end
+  end 
+
   def before_payment
     if @order.checkout_steps.include? "delivery"
       if @order.shipments.first.shipping_method.citybox? and @order.shipping_address.address2.presence
@@ -26,11 +36,13 @@ Spree::CheckoutController.class_eval do
 
   # Check if bill_address has dummy data (citybox indicator), if true, disable, hide, or remove chilexpress shipment
   def before_delivery
+    return if params[:order].present?
+    
     if @order.bill_address.address1 == 'dummy_address1' or @order.bill_address.city == 'dummy_city' or @order.shipments.first.shipping_method.citybox?
-      @order.bill_address.state = Spree::State.find_by_name('Metropolitana')
-      @order.shipping_method_id = Spree::ShippingMethod.find_by_name('Citybox Santiago').id
-      @order.save
       @disable_all_except_citybox = true
     end
+
+    packages = @order.shipments.map { |s| s.to_package }
+    @differentiator = Spree::Stock::Differentiator.new(@order, packages)
   end
 end
