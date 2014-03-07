@@ -38,7 +38,7 @@ Spree::CheckoutController.class_eval do
   def before_delivery
     return if params[:order].present?
     
-    if @order.bill_address.address1 == 'dummy_address1' or @order.bill_address.city == 'dummy_city' or @order.shipments.first.shipping_method.citybox?
+    if @order.bill_address.address1 == 'dummy_address1' or @order.bill_address.city == 'dummy_city' or @order.bill_address.address2.include? "CityBox"
       @disable_all_except_citybox = true
     end
 

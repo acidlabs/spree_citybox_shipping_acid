@@ -12,16 +12,18 @@
       }
     });
 
-    if ($("#use_citybox").checked){
+    if ($("#use_citybox").is(':checked')){
       set_address_dummy();
     } else {
       remove_address_dummy();
     }
 
     function remove_address_dummy(){
-      if ($("#order_bill_address_attributes_address1").val() == 'dummy_address1')
+      if ($("#order_bill_address_attributes_address1").val() == 'dummy_address1'){
         $("#order_bill_address_attributes_address1").val('');
-
+        $("#order_bill_address_attributes_address2").val('');
+      }
+        
       if ($("#order_bill_address_attributes_city").val() == 'dummy_city'){
         $("#order_bill_address_attributes_city").val('');
       }
@@ -52,7 +54,7 @@
       $(".citybox_hidden").hide();
       $("#order_bill_address_attributes_address1").val('dummy_address1');
       $("#order_bill_address_attributes_city").val('dummy_city');
-      $("#order_bill_address_attributes_zipcode").val('8320000');
+      $("#order_bill_address_attributes_zipcode").val('8320000'); // Postal Code Santiago
     }
   });  
   
