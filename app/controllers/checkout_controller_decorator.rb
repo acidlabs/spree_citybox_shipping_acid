@@ -14,16 +14,18 @@ Spree::CheckoutController.class_eval do
 
   def before_payment
     if @order.checkout_steps.include? "delivery"
-      if @order.shipments.first.shipping_method.citybox? and @order.shipping_address.address2.presence
-        citybox_address = @order.shipping_address.address2.split('//')
-        @order.shipping_address.address1 = citybox_address[1].lstrip.rstrip
-        @order.shipping_address.city     = citybox_address[2].lstrip.rstrip
-        @order.shipping_address.phone    = @order.shipping_address.phone
-        @order.billing_address.address1 = citybox_address[1].lstrip.rstrip
-        @order.billing_address.city     = citybox_address[2].lstrip.rstrip
-        @order.billing_address.phone    = @order.shipping_address.phone
-        @order.billing_address = @order.shipping_address
-        @order.save
+      if @order.shipments.first.shipping_method.citybox? and @order.shipping_address.company.presence
+        citybox_address = @order.shipping_address.company.split('//')
+        if citybox_address.kind_of?(Array)
+          @order.shipping_address.address1 = citybox_address[1].lstrip.rstrip
+          @order.shipping_address.city     = citybox_address[2].lstrip.rstrip
+          @order.shipping_address.phone    = @order.shipping_address.phone
+          @order.billing_address.address1 = citybox_address[1].lstrip.rstrip
+          @order.billing_address.city     = citybox_address[2].lstrip.rstrip
+          @order.billing_address.phone    = @order.shipping_address.phone
+          @order.billing_address = @order.shipping_address
+          @order.save
+        end
       end 
 
       packages = @order.shipments.map { |s| s.to_package }
