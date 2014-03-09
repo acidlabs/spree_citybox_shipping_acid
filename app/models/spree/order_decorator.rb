@@ -37,7 +37,7 @@ Spree::Order.class_eval do
   def insert_citybox(order)
     citybox = Spree::CityboxOrder.create(
       :customer_name    => "#{order.shipping_address.firstname} #{order.shipping_address.lastname}",
-      :citybox_location => order.shipping_address.address2.split("//").first.lstrip,
+      :citybox_location => order.shipping_address.company.split("//").first.lstrip,
       :city             => order.shipping_address.city,
       :country          => order.shipping_address.country.name,
       :product          => "21",
@@ -53,5 +53,7 @@ Spree::Order.class_eval do
       :email            => order.user.email,
       :phone            => order.shipping_address.phone
       )
+    order.shipping_address.company = nil
+    order.save
   end
 end
