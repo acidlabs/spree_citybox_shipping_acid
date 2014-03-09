@@ -20,9 +20,11 @@ Spree::CheckoutController.class_eval do
           @order.shipping_address.address1 = citybox_address[1].lstrip.rstrip
           @order.shipping_address.city     = citybox_address[2].lstrip.rstrip
           @order.shipping_address.phone    = @order.shipping_address.phone
+          @order.shipping_address.address2 = nil # Set nil because it's not used for citybox
           @order.billing_address.address1 = citybox_address[1].lstrip.rstrip
           @order.billing_address.city     = citybox_address[2].lstrip.rstrip
           @order.billing_address.phone    = @order.shipping_address.phone
+          @order.billing_address.address2 = nil  # Set nil because it's not used for citybox
           @order.billing_address = @order.shipping_address
           @order.save
         end
