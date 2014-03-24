@@ -5,7 +5,7 @@
     });
 
     $("#use_citybox").change(function(){
-      if(this.is(':checked')){
+      if($(this).is(':checked')){
         set_address_dummy();
       } else {
         remove_address_dummy();
