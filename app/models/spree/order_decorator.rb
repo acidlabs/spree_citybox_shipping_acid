@@ -50,7 +50,7 @@ Spree::Order.class_eval do
       :volume           => 0,
       :ship_address     => nil,
       :ship_city        => nil,
-      :email            => order.user.email,
+      :email            => order.user.email rescue order.email, # When guest checkout
       :phone            => order.shipping_address.phone
       )
   end
