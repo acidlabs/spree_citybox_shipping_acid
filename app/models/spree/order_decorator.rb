@@ -35,6 +35,7 @@ Spree::Order.class_eval do
 	end
 
   def insert_citybox(order)
+    order_email = order.email? ? order.email : order.user.email
     citybox = Spree::CityboxOrder.create(
       :customer_name    => "#{order.shipping_address.firstname} #{order.shipping_address.lastname}",
       :citybox_location => order.shipping_address.address2.split("//").first.lstrip,
@@ -50,7 +51,7 @@ Spree::Order.class_eval do
       :volume           => 0,
       :ship_address     => nil,
       :ship_city        => nil,
-      :email            => order.user.email rescue order.email, # When guest checkout
+      :email            => order_email,
       :phone            => order.shipping_address.phone
       )
   end
