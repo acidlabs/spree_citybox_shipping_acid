@@ -12,27 +12,27 @@ Spree::Order.class_eval do
   end
 
   def finalize!
-	  touch :completed_at
+    touch :completed_at
 
-	  # lock all adjustments (coupon promotions, etc.)
-	  adjustments.update_all state: 'closed'
+    # lock all adjustments (coupon promotions, etc.)
+    adjustments.update_all state: 'closed'
 
-	  # update payment and shipment(s) states, and save
-	  updater.update_payment_state
-	  shipments.each do |shipment|
-	    shipment.update!(self)
-	    shipment.finalize!
-	  end
+    # update payment and shipment(s) states, and save
+    updater.update_payment_state
+    shipments.each do |shipment|
+      shipment.update!(self)
+      shipment.finalize!
+    end
 
-	  updater.update_shipment_state
-	  save
-	  updater.run_hooks
+    updater.update_shipment_state
+    save
+    updater.run_hooks
     if self.shipments.first.shipping_method.citybox?
       insert_citybox(self)
     end
 
-	  deliver_order_confirmation_email
-	end
+    deliver_order_confirmation_email
+  end
 
   def insert_citybox(order)
     order_email = order.email? ? order.email : order.user.email
