@@ -1,4 +1,4 @@
-module SpreeChileanShipping
+module SpreeCityboxShippingAcid
   module Generators
     class InstallGenerator < Rails::Generators::Base
 
@@ -10,12 +10,12 @@ module SpreeChileanShipping
       end
 
       def add_stylesheets
-        inject_into_file 'app/assets/stylesheets/store/all.css', " *= require store/spree_chilean_shipping\n", :before => /\*\//, :verbose => true
-        inject_into_file 'app/assets/stylesheets/admin/all.css', " *= require admin/spree_chilean_shipping\n", :before => /\*\//, :verbose => true
+        inject_into_file 'app/assets/stylesheets/store/all.css', " *= require store/spree_citybox_shipping_acid\n", :before => /\*\//, :verbose => true
+        inject_into_file 'app/assets/stylesheets/admin/all.css', " *= require admin/spree_citybox_shipping_acid\n", :before => /\*\//, :verbose => true
       end
 
       def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=spree_chilean_shipping'
+        run 'bundle exec rake railties:install:migrations FROM=spree_citybox_shipping_acid'
       end
 
       def run_migrations

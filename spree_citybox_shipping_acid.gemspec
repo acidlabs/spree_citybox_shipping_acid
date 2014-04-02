@@ -1,10 +1,10 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_chilean_shipping'
+  s.name        = 'spree_citybox_shipping_acid'
   s.version     = '2.1.4.8'
-  s.summary     = 'Add support for chilean shipping methods'
-  s.description = 'Add support for chilean shipping methods like citybox and chilexpress'
+  s.summary     = 'Add support for chilean Citybox shippin methods'
+  s.description = 'Add support for chilean Citybox shippin methods'
   s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'Acid Labs'
@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.1.4'
-  s.add_dependency 'spree_frontend', '~> 2.1.4'
+  s.add_dependency 'spree_core', '~> 2.2.0'
+  s.add_dependency 'spree_frontend', '~> 2.2.0'
   s.add_dependency 'write_xlsx', '~> 0.76.0'
 
   s.add_development_dependency 'capybara', '~> 2.1'
