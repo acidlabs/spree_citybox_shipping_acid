@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_citybox_shipping_acid'
-  s.version     = '2.1.4.8'
+  s.version     = '0.1.1'
   s.summary     = 'Add support for chilean Citybox shippin methods'
   s.description = 'Add support for chilean Citybox shippin methods'
   s.required_ruby_version = '>= 1.9.3'
